@@ -25,6 +25,6 @@ public class Interest
 	
 	public double payment(double r, double p, double n, double t)
 	{
-		return (p*Math.pow((1+(r/n)),(n*t)))/(n*t);
+		return p*(Math.pow(1+r/n, n*t))/(12*t);
 	}
 }
