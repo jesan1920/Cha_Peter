@@ -17,7 +17,7 @@ public class replaceAts
 	{
 		while(a.indexOf("a") >= 0)
 		{
-			a = a.substring(0,a.indexOf("a")) + a.substring(sentenc.indexOf("a")+1) + "@";
+			a = a.substring(0,a.indexOf("a")) + "@" + a.substring(a.indexOf("a")+1);
 		}
 		sentence = a;
 	}
