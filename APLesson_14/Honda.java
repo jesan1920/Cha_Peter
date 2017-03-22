@@ -17,8 +17,8 @@ public class Honda implements Location
 	
 	public void move(int x, int y)
 	{
-		location[1] = x;
-		location[2] = y;
+		location[0] = x;
+		location[1] = y;
 	}
 	
 	public double[] getLoc()
