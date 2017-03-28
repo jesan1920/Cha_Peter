@@ -1,5 +1,5 @@
  import java.util.Random;
- public class Car implements Location
+ public abstract class Car implements Location
  {
 	Random ran = new Random();
 	public double[] location;
