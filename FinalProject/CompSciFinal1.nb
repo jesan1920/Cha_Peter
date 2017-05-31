@@ -1,0 +1,604 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23592,        596]
+NotebookOptionsPosition[     22537,        553]
+NotebookOutlinePosition[     22885,        568]
+CellTagsIndexPosition[     22842,        565]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Machine Learning with Rap", "Title",
+ CellChangeTimes->{{3.703344381266229*^9, 3.7033443879550924`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Initialization of Data Sets", "Section",
+ CellChangeTimes->{{3.703515305210399*^9, 3.703515315035225*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"bonfire", "=", 
+   RowBox[{"Import", "[", "\"\<bonfire.txt\>\"", "]"}]}], ";", 
+  RowBox[{"outside", "=", 
+   RowBox[{"Import", "[", "\"\<outside.txt\>\"", "]"}]}], ";", 
+  RowBox[{"sweatpants", "=", 
+   RowBox[{"Import", "[", "\"\<sweatpants.txt\>\"", "]"}]}], ";", 
+  RowBox[{"redbone", "=", 
+   RowBox[{"Import", "[", "\"\<redbone.txt\>\"", "]"}]}], ";", 
+  RowBox[{"firefly", "=", 
+   RowBox[{"Import", "[", "\"\<firefly.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"alright", "=", 
+   RowBox[{"Import", "[", "\"\<alright.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dna", "=", 
+   RowBox[{"Import", "[", "\"\<dna.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"humble", "=", 
+   RowBox[{"Import", "[", "\"\<humble.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"love", "=", 
+   RowBox[{"Import", "[", "\"\<love.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"element", "=", 
+   RowBox[{"Import", "[", "\"\<element.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"yah", "=", 
+   RowBox[{"Import", "[", "\"\<yah.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rap44bars", "=", 
+   RowBox[{"Import", "[", "\"\<44bars.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rap1800", " ", "=", 
+   RowBox[{"Import", "[", "\"\<1-800-273-8255.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"flexicution", "=", 
+   RowBox[{"Import", "[", "\"\<flexicution.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"takeitback", "=", 
+   RowBox[{"Import", "[", "\"\<takeitback.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"everybody", "=", 
+   RowBox[{"Import", "[", "\"\<everybody.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"blackspiderman", "=", 
+   RowBox[{"Import", "[", "\"\<blackspiderman.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"neighbors", "=", 
+   RowBox[{"Import", "[", "\"\<neighbors.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rap4youreyezonly", "=", 
+   RowBox[{"Import", "[", "\"\<4youreyezonly.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"wetdreamz", "=", 
+   RowBox[{"Import", "[", "\"\<wetdreamz.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gomd", "=", 
+   RowBox[{"Import", "[", "\"\<gomd.txt\>\"", "]"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.703334802554985*^9, 3.703334818556988*^9}, {
+   3.70333870252392*^9, 3.7033387026200705`*^9}, {3.7033405613115015`*^9, 
+   3.703340572857415*^9}, {3.703342899191903*^9, 3.7033429771100903`*^9}, {
+   3.7033430134476457`*^9, 3.703343169866661*^9}, 3.7035117596949434`*^9, {
+   3.703514281849744*^9, 3.70351428278485*^9}, 3.704455621617134*^9}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Artist Classification Through Lyrics", "Section",
+ CellChangeTimes->{{3.703344405632777*^9, 3.7033444177734137`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"lyrics", "=", "\[IndentingNewLine]", 
+  RowBox[{"Classify", "[", 
+   RowBox[{"<|", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\"\<Kendrick Lamar\>\"", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "alright", ",", "dna", ",", "love", ",", "humble", ",", "element", ",",
+         "yah"}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"\"\<Childish Gambino\>\"", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "bonfire", ",", "outside", ",", "sweatpants", ",", "redbone", ",", 
+        "firefly"}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"\"\<Logic\>\"", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "flexicution", ",", "rap1800", ",", "blackspiderman", ",", 
+        "takeitback", ",", "everybody", ",", "rap44bars"}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\"\<J. Cole\>\"", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "neighbors", ",", "rap4youreyezonly", ",", "wetdreamz", ",", "gomd"}], 
+       "}"}]}]}], "\[IndentingNewLine]", "|>"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.703335037519517*^9, 3.703335144317911*^9}, {
+  3.703335320702175*^9, 3.7033353285463223`*^9}, {3.7033406971507454`*^9, 
+  3.7033407143107033`*^9}, {3.703341913794673*^9, 3.703341959459713*^9}, {
+  3.703342006729512*^9, 3.703342008710637*^9}, {3.703342044144534*^9, 
+  3.7033421602588015`*^9}, {3.703342208703807*^9, 3.703342250731861*^9}, {
+  3.7033425156995306`*^9, 3.7033425526411076`*^9}, {3.7033426465413623`*^9, 
+  3.7033426639469905`*^9}, {3.7033436822821426`*^9, 3.703343695687847*^9}, {
+  3.703344114674445*^9, 3.703344118474764*^9}, {3.703344986373588*^9, 
+  3.7033450238445444`*^9}, {3.70351142746297*^9, 3.7035114295365114`*^9}, {
+  3.703514285127061*^9, 3.7035142861023464`*^9}, {3.7044532626167407`*^9, 
+  3.704453345572008*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TemplateBox[{RowBox[{
+      StyleBox[
+       TagBox["ClassifierFunction", "SummaryHead"], 
+       "NonInterpretableSummary"], 
+      StyleBox["[", "NonInterpretableSummary"], 
+      DynamicModuleBox[{Typeset`open$$ = False}, 
+       PanelBox[
+        PaneSelectorBox[{False -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquarePlusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = True), Appearance -> None,
+                 Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification]}]], 
+              GraphicsBox[{{
+                 PointSize[0.13], 
+                 GrayLevel[0.45], 
+                 
+                 PointBox[{{0.9821769431797024, -0.440194219686987}, {
+                  1.1339776261519132`, 0.8056918676854272}, {
+                  0.5279892326667741, 0.6574306661126254}, {
+                  0.022147046479890797`, 1.4937877187998898`}}], 
+                 GrayLevel[0.7], 
+                 
+                 PointBox[{{-0.9815166384819979, 
+                  0.15045697525228735`}, {-0.5923526886966953, \
+-0.33441771553094035`}, {-0.005656646679640442, -1.462421365651345}, \
+{-1.0734370436522753`, -1.3729645043477454`}}]}, {
+                 GrayLevel[0.55], 
+                 AbsoluteThickness[1.5], 
+                 LineBox[{{-1., 1.5}, {1, -1.6}}]}}, {
+               Axes -> {False, False}, AxesLabel -> {None, None}, 
+                AxesOrigin -> {0, 0}, BaseStyle -> {FontFamily -> "Arial", 
+                  AbsoluteThickness[1.5]}, DisplayFunction -> Identity, 
+                Frame -> {{True, True}, {True, True}}, 
+                FrameLabel -> {{None, None}, {None, None}}, FrameStyle -> 
+                Directive[
+                  Thickness[Tiny], 
+                  GrayLevel[0.7]], FrameTicks -> {{None, None}, {None, None}},
+                 GridLines -> {None, None}, 
+                LabelStyle -> {FontFamily -> "Arial"}, 
+                Method -> {"ScalingFunctions" -> None}, 
+                PlotRange -> {{-1., 1}, {-1.3, 1.1}}, PlotRangeClipping -> 
+                True, PlotRangePadding -> {{0.7, 0.7}, {0.7, 0.7}}, 
+                Ticks -> {None, None}}, Axes -> False, AspectRatio -> 1, 
+               ImageSize -> 
+               Dynamic[{
+                 Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+               FrameTicks -> None, FrameStyle -> Directive[
+                 Opacity[0.5], 
+                 Thickness[Tiny], 
+                 RGBColor[0.368417, 0.506779, 0.709798]]], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox["\"Method: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["\"Markov\"", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Number of classes: \"", "SummaryItemAnnotation"],
+                    "\[InvisibleSpace]", 
+                   TagBox["4", "SummaryItem"]}]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}], True -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquareMinusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = False), Appearance -> 
+                None, Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification]}]], 
+              GraphicsBox[{{
+                 PointSize[0.13], 
+                 GrayLevel[0.45], 
+                 
+                 PointBox[{{0.9821769431797024, -0.440194219686987}, {
+                  1.1339776261519132`, 0.8056918676854272}, {
+                  0.5279892326667741, 0.6574306661126254}, {
+                  0.022147046479890797`, 1.4937877187998898`}}], 
+                 GrayLevel[0.7], 
+                 
+                 PointBox[{{-0.9815166384819979, 
+                  0.15045697525228735`}, {-0.5923526886966953, \
+-0.33441771553094035`}, {-0.005656646679640442, -1.462421365651345}, \
+{-1.0734370436522753`, -1.3729645043477454`}}]}, {
+                 GrayLevel[0.55], 
+                 AbsoluteThickness[1.5], 
+                 LineBox[{{-1., 1.5}, {1, -1.6}}]}}, {
+               Axes -> {False, False}, AxesLabel -> {None, None}, 
+                AxesOrigin -> {0, 0}, BaseStyle -> {FontFamily -> "Arial", 
+                  AbsoluteThickness[1.5]}, DisplayFunction -> Identity, 
+                Frame -> {{True, True}, {True, True}}, 
+                FrameLabel -> {{None, None}, {None, None}}, FrameStyle -> 
+                Directive[
+                  Thickness[Tiny], 
+                  GrayLevel[0.7]], FrameTicks -> {{None, None}, {None, None}},
+                 GridLines -> {None, None}, 
+                LabelStyle -> {FontFamily -> "Arial"}, 
+                Method -> {"ScalingFunctions" -> None}, 
+                PlotRange -> {{-1., 1}, {-1.3, 1.1}}, PlotRangeClipping -> 
+                True, PlotRangePadding -> {{0.7, 0.7}, {0.7, 0.7}}, 
+                Ticks -> {None, None}}, Axes -> False, AspectRatio -> 1, 
+               ImageSize -> 
+               Dynamic[{
+                 Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+               FrameTicks -> None, FrameStyle -> Directive[
+                 Opacity[0.5], 
+                 Thickness[Tiny], 
+                 RGBColor[0.368417, 0.506779, 0.709798]]], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox["\"Method: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["\"Markov\"", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Number of classes: \"", "SummaryItemAnnotation"],
+                    "\[InvisibleSpace]", 
+                   TagBox["4", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Feature type: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["\"Text\"", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox[
+                   "\"Number of training examples: \"", 
+                    "SummaryItemAnnotation"], "\[InvisibleSpace]", 
+                   TagBox["21", "SummaryItem"]}]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}]}, 
+         Dynamic[Typeset`open$$], ImageSize -> Automatic], BaselinePosition -> 
+        Baseline], DynamicModuleValues :> {}], 
+      StyleBox["]", "NonInterpretableSummary"]}]},
+   "CopyTag",
+   DisplayFunction->(#& ),
+   InterpretationFunction->("ClassifierFunction[\[Ellipsis]]"& )],
+  False,
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{
+  3.703335147053665*^9, 3.7033353292872777`*^9, 3.703336946336611*^9, 
+   3.703338065473282*^9, 3.7033407147471323`*^9, 3.7033419640839415`*^9, 
+   3.703342011715823*^9, {3.7033420565426207`*^9, 3.7033420688291674`*^9}, {
+   3.703342100434703*^9, 3.703342125682829*^9}, 3.70334216130464*^9, {
+   3.7033421925049815`*^9, 3.703342251240795*^9}, 3.7033425392082305`*^9, 
+   3.7033426649286222`*^9, 3.703343195644251*^9, 3.703343700843471*^9, 
+   3.7033441189475827`*^9, 3.7033448939110656`*^9, {3.703344988301981*^9, 
+   3.7033450247294273`*^9}, 3.7035067332378893`*^9, 3.7035114303982906`*^9, 
+   3.703511676887579*^9, 3.703514009914806*^9, 3.7035141704169703`*^9, {
+   3.703514288912942*^9, 3.70351430007883*^9}, 3.703515568298239*^9, 
+   3.703516777380498*^9, 3.7035178003839684`*^9, 3.7044282248146553`*^9, 
+   3.704453316596089*^9, 3.704453359848363*^9, 3.7044534686074233`*^9, 
+   3.7044546609319715`*^9, 3.7044556639268875`*^9, 3.7044563709406633`*^9, 
+   3.705231427416149*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ClassifierInformation", "[", "lyrics", "]"}]], "Input",
+ CellChangeTimes->{{3.7046329423660936`*^9, 3.7046329474742117`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   StyleBox[
+    FrameBox[GridBox[{
+       {
+        ItemBox[
+         FrameBox[
+          StyleBox["\<\"Classifier information\"\>", "SuggestionsBarText",
+           StripOnInput->False,
+           FontSize->Larger],
+          FrameMargins->{{10, 0}, {-5, 5}},
+          FrameStyle->None,
+          StripOnInput->False],
+         Alignment->{Left, Bottom},
+         Background->RGBColor[0.93119, 0.93119, 0.93119],
+         Frame->{{False, False}, {True, False}},
+         FrameStyle->Opacity[0.1],
+         ItemSize->{Automatic, 1},
+         StripOnInput->False]},
+       {
+        ItemBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Method\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "\<\"Markov\"\>"},
+             {
+              StyleBox["\<\"Number of classes\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "4"},
+             {
+              StyleBox["\<\"Number of features\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "1"},
+             {
+              StyleBox["\<\"Number of training examples\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "21"},
+             {
+              StyleBox["\<\"Number of tokens\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "2149"},
+             {
+              StyleBox["\<\"Order\"\>",
+               StripOnInput->False,
+               LineOpacity->0.8,
+               FrontFaceOpacity->0.8,
+               BackFaceOpacity->0.8,
+               Opacity->0.8,
+               FontWeight->"SemiBold",
+               FontOpacity->0.8], "0"}
+            },
+            AutoDelete->False,
+            
+            BaseStyle->{
+             FontWeight -> "Light", FontFamily -> "Segoe UI", NumberMarks -> 
+              False},
+            
+            GridBoxAlignment->{
+             "Columns" -> {Right, {Left}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+            GridBoxDividers->{"Columns" -> {False, {
+                 Opacity[0.15]}, False}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{1.}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], 
+                Offset[2.0999999999999996`], {
+                 Offset[1.75]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.8]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           "Grid"],
+          FrameMargins->{{10, 10}, {10, 5}},
+          FrameStyle->None,
+          StripOnInput->False],
+         Alignment->Left,
+         BaseStyle->{Deployed -> False},
+         StripOnInput->False]}
+      },
+      DefaultBaseStyle->"Column",
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxDividers->{
+       "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+        "RowsIndexed" -> {}},
+      GridBoxItemSize->{
+       "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.5599999999999999]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], 
+          Offset[1.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     Background->RGBColor[0.9802, 0.9802, 0.9802],
+     FrameMargins->{{0, 0}, {0, 0}},
+     FrameStyle->GrayLevel[0.85],
+     RoundingRadius->5,
+     StripOnInput->False],
+    StripOnInput->False,
+    LineBreakWithin->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Association[
+  "Method" -> "Markov", "Number of classes" -> 4, "Number of features" -> 1, 
+   "Number of training examples" -> 21, "Number of tokens" -> 2149, "Order" -> 
+   0]]], "Output",
+ CellChangeTimes->{3.7046329476962533`*^9, 3.7052314284162984`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ClassifierInformation", "[", 
+  RowBox[{"lyrics", ",", "\"\<MethodDescription\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.704632952317788*^9, 3.7046329944673853`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  PanelBox["\<\"The markov classifier of order 0 assumes that tokens are \
+generated independently given the class and uses Bayes' theorem to predict \
+the class. It is also called unigram model or naive bayes model.\"\>",
+   BaseStyle->{LineIndent -> 0}],
+  Deploy,
+  DefaultBaseStyle->"Deploy"]], "Output",
+ CellChangeTimes->{{3.7046329784082484`*^9, 3.7046329948564672`*^9}, 
+   3.70523143284262*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"lyrics", "[", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", "\"\<TopProbabilities\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.7033444644328737`*^9, 3.703344484200389*^9}, {
+   3.703344652265903*^9, 3.703344680741497*^9}, {3.703344990182576*^9, 
+   3.70334509022246*^9}, {3.7035114325851336`*^9, 3.7035114343030276`*^9}, {
+   3.7035116573129244`*^9, 3.7035116718700953`*^9}, 3.703511713574713*^9, {
+   3.7035117711681943`*^9, 3.7035117730820427`*^9}, {3.704632212804368*^9, 
+   3.70463221298578*^9}, {3.704632930863284*^9, 3.704632930960105*^9}, {
+   3.7046330202448688`*^9, 3.704633048637389*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{{3.7046329281358647`*^9, 3.704632931330962*^9}, {
+  3.7046330231287103`*^9, 3.704633049015663*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"lyrics", "[", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", "\"\<Probabilities\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.704633050702191*^9, 3.7046330572731743`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.7046330580651937`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 110, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[715, 27, 112, 1, 70, "Section"],
+Cell[830, 30, 2990, 81, 427, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3857, 116, 123, 1, 56, "Section"],
+Cell[CellGroupData[{
+Cell[4005, 121, 1829, 36, 145, "Input"],
+Cell[5837, 159, 9568, 187, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15442, 351, 149, 2, 30, "Input"],
+Cell[15594, 355, 5103, 141, 204, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20734, 501, 194, 3, 30, "Input"],
+Cell[20931, 506, 426, 9, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21394, 520, 618, 10, 30, "Input"],
+Cell[22015, 532, 164, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22216, 540, 189, 4, 30, "Input"],
+Cell[22408, 546, 89, 2, 30, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
