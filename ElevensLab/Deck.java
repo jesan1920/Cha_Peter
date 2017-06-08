@@ -34,8 +34,8 @@ public class Deck {
 		this.cards = new ArrayList <Card>();
 		for(int i = 0; i < ranks.length; i++)
 		{
-			Card card = new Card(ranks[i],suits[i],values[i]);
-			this.cards.add(card);
+			for(String suit : suits)
+				this.cards.add(new Card(ranks[i],suit,values[i]));
 		}
 		
 		this.size = this.cards.size();
